@@ -1,17 +1,11 @@
-#include<iostream>
-#include<vector>
-#include<math.h>
-#include<string>
-using namespace std;
-
-class  Solution
-{
-private:
-    /* data */
+/*
+ * @lc app=leetcode.cn id=12 lang=cpp
+ *
+ * [12] 整数转罗马数字
+ */
+class Solution {
 public:
-     Solution(/* args */ );
-    ~ Solution( );
-   string intToRoman(int num) {
+    string intToRoman(int num) {
         string result ;
         int count = 1;
         while (num)
@@ -112,22 +106,6 @@ public:
         return result;
         
     }
+
 };
- Solution:: Solution(/* args */)
-{
 
-}
-
- Solution::~ Solution()
-{
-
-}
-int main(int argc,char** argv){
-    
-    cout<<"12 罗马数字转换"<<endl;
-    Solution s;
-    cout<<s.intToRoman(1994)<<endl;
-    cout<<endl;
-
-    return 0;
-}

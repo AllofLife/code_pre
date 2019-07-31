@@ -1,7 +1,7 @@
 /*
  * @lc app=leetcode.cn id=10 lang=cpp
  *
- * [10] 正则表达式匹配
+ * [10] 正则表达式匹配i
  */
 class Solution {
 public:
