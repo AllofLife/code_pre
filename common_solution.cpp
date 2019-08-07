@@ -2,6 +2,8 @@
 #include<vector>
 #include<math.h>
 #include<string>
+#include<unordered_map>
+
 using namespace std;
 
 class  Solution
@@ -11,105 +13,26 @@ private:
 public:
      Solution(/* args */ );
     ~ Solution( );
-   string intToRoman(int num) {
-        string result ;
-        int count = 1;
-        while (num)
-        {
-            if(num / 1000 ){
-                count = num / 1000;
-                for (int i = 0; i < count; i++)
+   string longestCommonPrefix(vector<string>& strs) {
+     if (strs.empty())
+     {
+       return "";
+     }
+     
+     for (int i = 0; i < strs[0].size(); i++)
+     {
+       for (int j = 1; j < strs.size(); j++)
+       {
+                if (strs[j][i]!=strs[0][i])
                 {
-                     result +="M";
-                }                            
-                num = num - 1000 * count;
-            }
-            else if (num / 900)
-            {
-               result += "CM" ;
-                num = num - 900;
-            }
-            else if (num / 500)
-            {
-               result += "D" ;
-                num = num - 500;
-            }
-            else if (num / 400)
-            {
-               
-                result += "CD" ;                
-                num = num -  400;
-            }
-            else if (num / 100)
-            {
-                count = num / 100;
-                for (int i = 0; i < count; i++)
-                {
-                    result += "C" ;
-                }              
-                num = num - 100 * count;
-            }
-            else if (num / 90)
-            {
-               
-                result += "XC" ;                          
-                num = num -  90;
-            }
-             else if (num / 50)
-            {
-               
-                result += "L" ;                         
-                num = num -  50;
-            }
-             else if (num / 40)
-            {
+                  return strs[0].substr(0,i);
+                }
                 
-                result += "XL" ;                      
-                num = num - 40;
-            }
-             else if (num / 10)
-            {
-                count = num / 10;
-                for (int i = 0; i < count; i++)
-                {
-                    result += "X" ;
-                }              
-                num = num - 10 * count;
-            }
-            else if (num / 9)
-            {
-               
-                result += "IX" ;                          
-                num = num -  9;
-            }
-             else if (num / 5)
-            {
-               
-                result += "V" ;                          
-                num = num -  5;
-            }
-             else if (num / 4)
-            {
-                
-                result += "IV" ;                      
-                num = num - 4;
-            }
-             else if (num / 1)
-            {
-                count = num / 1;
-                for (int i = 0; i < count; i++)
-                {
-                    result += "I" ;
-                }              
-                num = num - 1 * count;
-            }
-            
-           
-            
        }
-        
-        
-        return result;
+       
+     }
+     return strs[0];
+     
         
     }
 };
@@ -124,9 +47,13 @@ public:
 }
 int main(int argc,char** argv){
     
-    cout<<"12 罗马数字转换"<<endl;
+    cout<<"14 最长公共前缀"<<endl;
+    vector<string> VsTest;
+    VsTest.push_back("dog");
+    VsTest.push_back("dracecar");
+    VsTest.push_back("dcar");
     Solution s;
-    cout<<s.intToRoman(1994)<<endl;
+    cout<<s.longestCommonPrefix(VsTest)<<endl;
     cout<<endl;
 
     return 0;
