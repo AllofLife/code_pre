@@ -1,25 +1,10 @@
-#include<iostream>
-#include<vector>
-#include<math.h>
-#include<string>
-#include<unordered_map>
-#include<algorithm>
-#include<stack>
-using namespace std;
-
-
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
-    };
-class  Solution
-{
-private:
-   
+/*
+ * @lc app=leetcode.cn id=20 lang=cpp
+ *
+ * [20] 有效的括号
+ */
+class Solution {
 public:
-     Solution(/* args */ );
-    ~ Solution();
     bool judge(char top,char newchar){
         if(top == '(' && newchar == ')'){
             return true;
@@ -38,6 +23,11 @@ public:
             
     };
     bool isValid(string s) {
+        if (s.size()%2 != 0)
+        {
+            return false;
+        }
+        
         // stack<char> s1;
         stack<char> s1;
         // s1.push();
@@ -106,43 +96,4 @@ public:
 
     }
 };
- Solution:: Solution(/* args */)
-{
 
-}
-
- Solution::~ Solution()
-{
-
-}
-
-int main(int argc,char** argv){
-    
-    cout<<"20 有效的括号"<<endl;
-    string stest = "() []{}";
-    Solution s;
-    
-    if(s.isValid(stest)){
-        cout<<"true"<<endl;
-    }
-    else
-    {
-        cout<<"false"<<endl;
-    }
-    // stest.erase(0,1);
-    // // stest.substr(0,0);
-    // // stest.erase(1);
-    // // stest.erase(2);
-    // if (stest.empty())
-    // {
-    //     cout<<"stest 为空"<<endl;
-    // }else
-    // {
-    //     cout<<"stest 不为空"<<stest<<endl;
-    // }
-    
-    
-    
-   
-    return 0;
-}
