@@ -20,33 +20,30 @@ private:
 public:
      Solution(/* args */ );
     ~ Solution();
-    void backtack(vector<string> &vresult,string scurrent, int open,int close,int max){
-        if (open > max || close > max || close > open){
-            return ;
-        }
-        if (open == max && close == max)
+    int removeDuplicates(vector<int>& nums) {
+        int i = 0;
+        int j = i + 1;
+        int vsize = nums.size();
+        while (j < vsize)
         {
-            vresult.push_back(scurrent);
-            return;
+            if (nums[i] == nums[j])
+            {
+               j++;
+            }
+            else
+            {
+                i++;
+                nums[i] = nums[j];
+                j++;
+            }
+            
+            
         }
+        
         
        
-        backtack(vresult,scurrent+"(",open+1,close,max);
-        backtack(vresult,scurrent+")",open,close+1,max);
-        return ;
-
-            
-            
-            
-     
         
-    }
-     vector<string> generateParenthesis(int n) {
-     vector<string> result;
-     backtack(result,"",0,0,n);
-      return result;
-
-
+        return i + 1;
     }
 };
  Solution:: Solution(/* args */)
@@ -75,11 +72,28 @@ void printString(string out){
 }
 int main(int argc,char** argv){
     
-    cout<<"22 括号生成"<<endl;
-    
+    cout<<"26 "<<endl;
+    vector<int> nums;
+    nums.push_back(1);
+    nums.push_back(1);
+    nums.push_back(1);
+    nums.push_back(1);
+    nums.push_back(2);
+    nums.push_back(2);
+    nums.push_back(2);
+    nums.push_back(3);
+        nums.push_back(3);
+            nums.push_back(3);
+            nums.push_back(3);
+
+            nums.push_back(3);
+
+            nums.push_back(3);
+
     Solution s;
-    vector<string> vs = s.generateParenthesis(3);
-    for_each(vs.begin(),vs.end(),printString);
+    int size = s.removeDuplicates(nums);
+    for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
+    cout<<endl;
     
     
    
