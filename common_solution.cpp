@@ -20,22 +20,20 @@ private:
 public:
      Solution(/* args */ );
     ~ Solution();
-    int removeDuplicates(vector<int>& nums) {
+    int removeElement(vector<int>& nums, int val) {
         int i = 0;
-        int j = i + 1;
+        int j = 0;
         int vsize = nums.size();
         while (j < vsize)
         {
-            if (nums[i] == nums[j])
+            // cout<<nums[j]<<endl;
+            if (nums[j]!=val)
             {
-               j++;
+              nums[i] = nums[j];
+               i++;
+              
             }
-            else
-            {
-                i++;
-                nums[i] = nums[j];
-                j++;
-            }
+            j++;
             
             
         }
@@ -43,7 +41,7 @@ public:
         
        
         
-        return i + 1;
+        return i  ;
     }
 };
  Solution:: Solution(/* args */)
@@ -74,24 +72,24 @@ int main(int argc,char** argv){
     
     cout<<"26 "<<endl;
     vector<int> nums;
-    nums.push_back(1);
-    nums.push_back(1);
-    nums.push_back(1);
-    nums.push_back(1);
-    nums.push_back(2);
-    nums.push_back(2);
-    nums.push_back(2);
+    // nums.push_back(1);
+    // nums.push_back(1);
+    // nums.push_back(1);
+    // nums.push_back(1);
+    // nums.push_back(2);
     nums.push_back(3);
-        nums.push_back(3);
-            nums.push_back(3);
-            nums.push_back(3);
+    nums.push_back(2);
+    nums.push_back(4);
+    nums.push_back(3);
+    // nums.push_back(3);
+    // nums.push_back(3);
 
-            nums.push_back(3);
+    // nums.push_back(3);
 
-            nums.push_back(3);
+    // nums.push_back(3);
 
     Solution s;
-    int size = s.removeDuplicates(nums);
+    int size = s.removeElement(nums,3);
     for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
     cout<<endl;
     
