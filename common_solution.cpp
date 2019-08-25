@@ -20,28 +20,41 @@ private:
 public:
      Solution(/* args */ );
     ~ Solution();
-    int removeElement(vector<int>& nums, int val) {
-        int i = 0;
-        int j = 0;
-        int vsize = nums.size();
-        while (j < vsize)
+    void nextPermutation(vector<int>& nums) {
+        if (nums.size()==0)
         {
-            // cout<<nums[j]<<endl;
-            if (nums[j]!=val)
-            {
-              nums[i] = nums[j];
-               i++;
-              
-            }
-            j++;
-            
-            
+           return ;
         }
         
+        // int max_order = nums[0];
+        int i  =nums.size() -2 ;
+
+        for (; i >= 0; i--)
+        {
+            // 找到第一个下降的地方
+            if (nums[i] < nums[i + 1])
+            {
+                // cout<<nums[i]<<nums[i+1]<<endl;
+                break;
+            }
+            
+        }
+        if(i >= 0){
+            int j = nums.size() - 1;
+            while (j >= 0 && nums[j] <= nums[i])
+            {
+               j--;
+            }
+            // cout<<nums[i]<<nums[j]<<endl;
+            int tmp = nums[j];
+            nums[j] = nums[i];
+            nums[i] = tmp;
+            // return;
+        }
+        // cout<<"i"<<i<<endl;
+        // 把后面的数排序
+        sort(nums.begin()+i+1,nums.end());
         
-       
-        
-        return i  ;
     }
 };
  Solution:: Solution(/* args */)
@@ -70,26 +83,23 @@ void printString(string out){
 }
 int main(int argc,char** argv){
     
-    cout<<"26 "<<endl;
+    cout<<"31 "<<endl;
     vector<int> nums;
     // nums.push_back(1);
-    // nums.push_back(1);
-    // nums.push_back(1);
+    // nums.push_back(2);
+    // nums.push_back(3);
     // nums.push_back(1);
     // nums.push_back(2);
+    // nums.push_back(3);
+    nums.push_back(1);
     nums.push_back(3);
     nums.push_back(2);
-    nums.push_back(4);
-    nums.push_back(3);
-    // nums.push_back(3);
-    // nums.push_back(3);
 
-    // nums.push_back(3);
-
-    // nums.push_back(3);
 
     Solution s;
-    int size = s.removeElement(nums,3);
+    int size =nums.size();
+    // int size = s.nextPermutation(nums);
+    s.nextPermutation(nums);
     for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
     cout<<endl;
     
