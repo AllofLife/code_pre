@@ -20,61 +20,78 @@ private:
 public:
      Solution(/* args */ );
     ~ Solution();
-    int search(vector<int>& nums, int target) {
-         if (nums.size() == 0)
+    vector<int> searchRange(vector<int>& nums, int target) {
+        if (nums.size()==0)
         {
-            return -1;
+            return vector<int> {-1,-1};
         }
-        if (nums.size() == 1)
+        if (nums.size()==1)
         {
             if (nums[0]==target)
             {
-               return 0;
-            }
-            else
-            {
-                return -1;
-            }
-              
-        }
-        if (nums.size() == 2)
-        {
-            if (nums[0]==target)
-            {
-               return 0;
-            }
-            else if(nums[1]==target)
-            {
-                return 1;
+              return vector<int> {0,0};
             }
             
-            else
-            {
-                return -1;
-            }
+            
+            return vector<int> {-1,-1};
+        }
+        int first = 0;
+        int last = nums.size();
+        int mid = (first + last) / 2;
+         int l = 0,r = 0;
+         // 找左边界
+         while (first < last)
+         {
+           if (nums[mid] == target)
+           {
+               last = mid;
+           }
+           else if (nums[mid] > target)
+           {
+               last = mid;
+           }
+           else if(nums[mid] < target)
+           {
+               first = mid + 1;
+           }
+           cout<<"mid "<<mid<<" first "<<first<<" last "<<last<<endl;
+            mid = (first  + last ) / 2;
+            
+           
+         }
+        //  cout<<"mid "<<mid<<endl;
+        //  cout<<"first "<<first<<endl;
+         l = first;
+         // 找右边界
+         first = 0;
+         last = nums.size();
+         mid = (first + last) / 2;
+         while (first < last)
+         {
+           if (nums[mid] == target)
+           {
+               first = mid + 1;
+           }
+           else if (nums[mid] > target)
+           {
+               last = mid;
+           }
+           else if(nums[mid] < target)
+           {
+               first = mid + 1;
+           }
+            mid = (first  + last ) / 2;
+           
+         }
+         r = last -1;
+        //  cout<<"first "<<l<<" last: "<<r<<endl;
+        if (r < l)
+        {
+            return vector<int> {-1 ,-1};
         }
         
-        int vsize = nums.size();
-        int i = vsize - 1;
-        while (i >= 0 && nums[i] > nums[i -1])
-        {
-            i--;
-        }
-        cout<<"i "<<i<<nums[i]<<endl;
-        cout<<"size - 1 "<<nums[vsize -1]<<endl;
+        return vector<int> {l ,r};
         
-        if (nums[i] <= target && nums[vsize - 1] >= target )
-        {
-           return binary_search(nums.begin() + i,nums.end(),target) + 1;
-        }
-        else if (nums[0] <= target && nums[i - 1] >= target)
-        {
-            cout<<"i"<<i<<"target"<<target<<endl;
-           return binary_search(nums.begin(),nums.begin()+ i -1,target) - 1;
-        }
-        return -1;
-    
-          
     }
 };
  Solution:: Solution(/* args */)
@@ -105,20 +122,26 @@ int main(int argc,char** argv){
     
     cout<<"31 "<<endl;
     vector<int> nums;
-    nums.push_back(1);
-    nums.push_back(3);
+    // nums.push_back(5);
+    nums.push_back(5);
+    nums.push_back(7);
+    nums.push_back(7);
+    nums.push_back(8);
+    nums.push_back(8);
+    nums.push_back(10);
     // nums.push_back(4);
     // nums.push_back(5);
     // nums.push_back(6);
     // nums.push_back(7);
-    // nums.push_back(0);
-    // nums.push_back(1);
-    // nums.push_back(2);
+
 
     Solution s;
     int size =nums.size();
-    cout<<s.search(nums,0)<<endl;
+    vector<int> vre = s.searchRange(nums,6);
+    // cout<<s.search(nums,0)<<endl;
     for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
+    cout<<endl;
+    for_each(vre.begin(),vre.begin() + 2,[](int ele){cout<<ele<<" ";});
     cout<<endl;
     
     
