@@ -20,77 +20,36 @@ private:
 public:
      Solution(/* args */ );
     ~ Solution();
-    vector<int> searchRange(vector<int>& nums, int target) {
-        if (nums.size()==0)
-        {
-            return vector<int> {-1,-1};
-        }
-        if (nums.size()==1)
-        {
-            if (nums[0]==target)
-            {
-              return vector<int> {0,0};
-            }
-            
-            
-            return vector<int> {-1,-1};
-        }
-        int first = 0;
-        int last = nums.size();
-        int mid = (first + last) / 2;
-         int l = 0,r = 0;
-         // 找左边界
-         while (first < last)
-         {
-           if (nums[mid] == target)
+   int searchInsert(vector<int>& nums, int target) {
+       if (nums.size() == 0)
+       {
+           return 0;
+       }
+       
+       int low,hight;
+       low = 0;
+       hight = nums.size() - 1;
+       int middle = (low + hight) / 2;
+       while (low <= hight)
+       {
+           if (nums[middle] < target)
            {
-               last = mid;
+              low = middle + 1;
            }
-           else if (nums[mid] > target)
+           else if(nums[middle] > target)
            {
-               last = mid;
+               hight = middle -1;
            }
-           else if(nums[mid] < target)
+           else
            {
-               first = mid + 1;
+               break;
            }
-           cout<<"mid "<<mid<<" first "<<first<<" last "<<last<<endl;
-            mid = (first  + last ) / 2;
-            
            
-         }
-        //  cout<<"mid "<<mid<<endl;
-        //  cout<<"first "<<first<<endl;
-         l = first;
-         // 找右边界
-         first = 0;
-         last = nums.size();
-         mid = (first + last) / 2;
-         while (first < last)
-         {
-           if (nums[mid] == target)
-           {
-               first = mid + 1;
-           }
-           else if (nums[mid] > target)
-           {
-               last = mid;
-           }
-           else if(nums[mid] < target)
-           {
-               first = mid + 1;
-           }
-            mid = (first  + last ) / 2;
+          middle = (low + hight) / 2;
            
-         }
-         r = last -1;
-        //  cout<<"first "<<l<<" last: "<<r<<endl;
-        if (r < l)
-        {
-            return vector<int> {-1 ,-1};
-        }
-        
-        return vector<int> {l ,r};
+       }
+
+       return middle;
         
     }
 };
@@ -125,8 +84,8 @@ int main(int argc,char** argv){
     // nums.push_back(5);
     nums.push_back(5);
     nums.push_back(7);
-    nums.push_back(7);
-    nums.push_back(8);
+    // nums.push_back(7);
+    // nums.push_back(8);
     nums.push_back(8);
     nums.push_back(10);
     // nums.push_back(4);
@@ -136,13 +95,11 @@ int main(int argc,char** argv){
 
 
     Solution s;
-    int size =nums.size();
-    vector<int> vre = s.searchRange(nums,6);
-    // cout<<s.search(nums,0)<<endl;
+    int size =nums.size();   
+    cout<<s.searchInsert(nums,7)<<endl;
     for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
     cout<<endl;
-    for_each(vre.begin(),vre.begin() + 2,[](int ele){cout<<ele<<" ";});
-    cout<<endl;
+    
     
     
    
