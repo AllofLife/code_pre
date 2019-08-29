@@ -16,41 +16,32 @@ struct ListNode {
 class  Solution
 {
 private:
-   
+   vector<int> candidates;
+   vector<vector<int>> res;
+   vector<int> path;
 public:
      Solution(/* args */ );
     ~ Solution();
-   int searchInsert(vector<int>& nums, int target) {
-       if (nums.size() == 0)
-       {
-           return 0;
-       }
-       
-       int low,hight;
-       low = 0;
-       hight = nums.size() - 1;
-       int middle = (low + hight) / 2;
-       while (low <= hight)
-       {
-           if (nums[middle] < target)
-           {
-              low = middle + 1;
-           }
-           else if(nums[middle] > target)
-           {
-               hight = middle -1;
-           }
-           else
-           {
-               break;
-           }
-           
-          middle = (low + hight) / 2;
-           
-       }
-
-       return middle;
+    void DFS(int start,int target){
+        if (target == 0)
+        {
+            res.push_back(path);
+            return;
+        }
+        for (int i = start; i < candidates.size() && target - candidates[i] >=0; i++)
+        {
+            path.push_back(candidates[i]);
+            DFS(i,target - candidates[i]);
+            path.pop_back();
+        }
         
+    }
+  vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+      sort(candidates.begin(),candidates.end());
+      this->candidates = candidates;
+      DFS(0,target);
+
+        return res;
     }
 };
  Solution:: Solution(/* args */)
@@ -61,6 +52,15 @@ public:
  Solution::~ Solution()
 {
 
+}
+void printVV(vector<int> vint ){
+    for (vector<int>::iterator it = vint.begin(); it < vint.end(); it++){
+        cout<<*it<<" ";
+  
+    }
+    cout<<endl;
+  
+    
 }
 void printList(ListNode* head){
     ListNode* pList = head;
@@ -82,12 +82,12 @@ int main(int argc,char** argv){
     cout<<"31 "<<endl;
     vector<int> nums;
     // nums.push_back(5);
-    nums.push_back(5);
-    nums.push_back(7);
+    nums.push_back(2);
+    nums.push_back(3);
     // nums.push_back(7);
     // nums.push_back(8);
-    nums.push_back(8);
-    nums.push_back(10);
+    nums.push_back(6);
+    nums.push_back(7);
     // nums.push_back(4);
     // nums.push_back(5);
     // nums.push_back(6);
@@ -95,10 +95,14 @@ int main(int argc,char** argv){
 
 
     Solution s;
-    int size =nums.size();   
-    cout<<s.searchInsert(nums,7)<<endl;
+    int size =nums.size();
+    vector<vector<int>>   vvresult;
+    vvresult = s.combinationSum(nums,7);
+
+    // cout<<s.combinationSum(nums,7)<<endl;
     for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
     cout<<endl;
+    for_each(vvresult.begin(),vvresult.end(),printVV);
     
     
     
