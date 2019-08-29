@@ -32,7 +32,6 @@ public:
       sort(candidates.begin(),candidates.end());
       this->candidates = candidates;
       DFS(0,target);
-
         return res;
     }
 };
