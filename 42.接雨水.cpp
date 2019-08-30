@@ -5,24 +5,39 @@
  */
 class Solution {
 public:
-    int trap(vector<int>& height) {
-       int ans = 0;
-       for (int i = 1; i < height.size(); i++)
-       {
-           int max_left = 0,max_right = 0;
-           for (int j = i; j >= 0; j--)
-           {
-               max_left =  max(max_left,height[j]);
-           }
-           for (int j = i; j < height.size(); j++)
-           {
-              max_right = max(max_right,height[j]);
-           }
-           
-           ans += min(max_left,max_right) - height[i];
-       }
-       
+   int trap(vector<int>& height) {
+        //用栈来解决
+        if (height.size() == 0)
+        {
+            return 0;
+        }
+        
+        int ans = 0;
+        stack<int> st;
+        int current = 0;
+        while (current < height.size())
+        {
+            while (!st.empty() && height[current] > height[st.top()])
+            {
+               int top = st.top();
+               // 弹出当前元素 找到左边界
+               st.pop();
+               if (st.empty())
+               {
+                   break;
+               }
+               int distance = current - st.top() -1;
+               int detla = min( height[current],height[st.top()] ) - height[top];
+                ans += detla * distance;
+            }
+
+            
+           st.push(current++);
+        }
+        
         return ans;
+    
     }
+    
 };
 
