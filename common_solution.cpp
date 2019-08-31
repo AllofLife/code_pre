@@ -15,95 +15,47 @@ struct ListNode {
     };
 class  Solution
 {
-// private:
-//    vector<int> candidates;
-//    vector<vector<int>> res;
-//    vector<int> path;
+
 public:
      Solution(/* args */ );
     ~ Solution();
-//    int trap(vector<int>& height) {
-//        int ans = 0;
-//        for (int i = 1; i < height.size(); i++)
-//        {
-//            int max_left = 0,max_right = 0;
-//            for (int j = i; j >= 0; j--)
-//            {
-//                max_left =  max(max_left,height[j]);
-//            }
-//            for (int j = i; j < height.size(); j++)
-//            {
-//               max_right = max(max_right,height[j]);
-//            }
-           
-//            ans += min(max_left,max_right) - height[i];
-//        }
-       
-//         return ans;
-//     }
-//  int trap(vector<int>& height) {
-//     // 存储每一个元素的左边最大和右边最大 三次循环
-//     if (height.size() == 0)
-//     {
-//         return 0;
-//     }
-//     int size = height.size();
-//     int ans = 0;
-//     vector<int> left(size),right(size);
-//     // 初始化
-//     left[0] = height[0]; 
-//     right[size - 1] = height[size - 1];
+      void rotate(vector<vector<int>>& matrix) {
+        int size = matrix.size() - 1;
+        // if(size % 2 == 0){
+        //     size = size;
+        // }
 
-//     for (int i = 1; i < size; i++)
-//     {
-//         left[i] = max(height[i],left[i - 1]);
-//     }
-    
-//     for (int i = size - 2; i >= 0; i --)
-//     {
-//        right[i] = max(height[i],right[i + 1]);
-//     }
-//     for (int i = 0; i < size; i++)
-//     {
-//        ans += min(left[i],right[i]) - height[i];
-//     }
-    
-//     return ans;
-//     }
-    int trap(vector<int>& height) {
-        //用栈来解决
-        if (height.size() == 0)
+
+        for (int i = 0; i < matrix.size(); i++)
         {
-            return 0;
-        }
-        
-        int ans = 0;
-        stack<int> st;
-        int current = 0;
-        while (current < height.size())
-        {
-            while (!st.empty() && height[current] > height[st.top()])
+            for (int j = i; j < matrix.size(); j++)
             {
-               int top = st.top();
-               // 弹出当前元素 找到左边界
-               st.pop();
-               if (st.empty())
-               {
-                   break;
-               }
-               int distance = current - st.top() -1;
-               int detla = min( height[current],height[st.top()] ) - height[top];
-                ans += detla * distance;
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = tmp;
             }
-
             
-           st.push(current++);
+        }
+         for (int i = 0; i < matrix.size(); i++)
+        {
+            for (int j = 0; j <= size / 2; j++)
+            {
+                // if (size % 2 == 0 && size / 2 == j)
+                // {
+                //    break;
+                // }
+                
+                int tmp = matrix[i][j];
+                // matrix[j][i] = matrix[size - j][i];
+                // matrix[size - j][i] = tmp;
+                matrix[i][j] = matrix[i][size - j];
+                matrix[i][size - j] = tmp;
+            }
+            
         }
         
-        return ans;
-    
     }
-    
+
 };
  Solution:: Solution(/* args */)
 {
@@ -141,31 +93,45 @@ void printString(string out){
 int main(int argc,char** argv){
     
     cout<<"31 "<<endl;
-    vector<int> nums;
-    nums.push_back(0);
-    nums.push_back(1);
-    nums.push_back(0);
-    nums.push_back(2);
-    nums.push_back(1);
-    nums.push_back(0);
-    nums.push_back(1);
-    nums.push_back(3);
-    nums.push_back(2);
-    nums.push_back(1);
-    nums.push_back(2);
-    nums.push_back(1);
+    vector<vector<int>> nums;
+    nums.resize(3);
+    
+    nums[0].push_back(1);
+    nums[0].push_back(2);
+    nums[0].push_back(3);
+    nums[1].push_back(4);
+    nums[1].push_back(5);
+    nums[1].push_back(6);
+    nums[2].push_back(7);
+    nums[2].push_back(8);
+    nums[2].push_back(9);
+    
+    // nums[0].push_back(1);
+    // nums[0].push_back(2);
+    // nums[0].push_back(3);
+    // nums[0].push_back(4);
+    // nums[1].push_back(5);
+    // nums[1].push_back(6);
+    // nums[1].push_back(7);
+    // nums[1].push_back(8);
+    // nums[2].push_back(9);
+    // nums[2].push_back(10);
+    // nums[2].push_back(11);
+    // nums[2].push_back(12);
+    // nums[3].push_back(13);
+    // nums[3].push_back(14);
+    // nums[3].push_back(15);
+    // nums[3].push_back(16);
+
 
 
     Solution s;
-    int size =nums.size();
-    
-    // cout<<s.combinationSum(nums,7)<<endl;
-    for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
+    // int size =nums.size();
+    for_each(nums.begin(),nums.end(),printVV);
+    // for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
     cout<<endl;
-    cout<<s.trap(nums)<<endl;
-    
-    
-    
+    s.rotate(nums);    
+    for_each(nums.begin(),nums.end(),printVV);
    
     return 0;
 }

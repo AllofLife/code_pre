@@ -5,7 +5,55 @@
  */
 class Solution {
 public:
-   int trap(vector<int>& height) {
+  //    int trap(vector<int>& height) {
+//        int ans = 0;
+//        for (int i = 1; i < height.size(); i++)
+//        {
+//            int max_left = 0,max_right = 0;
+//            for (int j = i; j >= 0; j--)
+//            {
+//                max_left =  max(max_left,height[j]);
+//            }
+//            for (int j = i; j < height.size(); j++)
+//            {
+//               max_right = max(max_right,height[j]);
+//            }
+           
+//            ans += min(max_left,max_right) - height[i];
+//        }
+       
+//         return ans;
+//     }
+//  int trap(vector<int>& height) {
+//     // 存储每一个元素的左边最大和右边最大 三次循环
+//     if (height.size() == 0)
+//     {
+//         return 0;
+//     }
+//     int size = height.size();
+//     int ans = 0;
+//     vector<int> left(size),right(size);
+//     // 初始化
+//     left[0] = height[0]; 
+//     right[size - 1] = height[size - 1];
+
+//     for (int i = 1; i < size; i++)
+//     {
+//         left[i] = max(height[i],left[i - 1]);
+//     }
+    
+//     for (int i = size - 2; i >= 0; i --)
+//     {
+//        right[i] = max(height[i],right[i + 1]);
+//     }
+//     for (int i = 0; i < size; i++)
+//     {
+//        ans += min(left[i],right[i]) - height[i];
+//     }
+    
+//     return ans;
+//     }
+    int trap(vector<int>& height) {
         //用栈来解决
         if (height.size() == 0)
         {
@@ -38,6 +86,7 @@ public:
         return ans;
     
     }
+    
     
 };
 
