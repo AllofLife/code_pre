@@ -19,41 +19,67 @@ class  Solution
 public:
      Solution(/* args */ );
     ~ Solution();
-      void rotate(vector<vector<int>>& matrix) {
-        int size = matrix.size() - 1;
-        // if(size % 2 == 0){
-        //     size = size;
-        // }
-
-
-        for (int i = 0; i < matrix.size(); i++)
+      vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int>  ans;
+        if (matrix.empty())
         {
-            for (int j = i; j < matrix.size(); j++)
+            return ans;
+        }
+        
+        // vector<vector<int>> vv_bool;
+        
+        int R_size = matrix.size(), C_size = matrix[0].size();
+        cout<<R_size<<" "<<C_size<<endl;
+        bool vv_bool[R_size][C_size] = {false};
+        int r = 0,c = 0;
+        int dic_r[4] = {0,1,0,-1};
+        int dic_c[4] = {1,0,-1,0};
+        int det = 0;
+        // 前进的方向
+        for (int i = 0; i < R_size * C_size; i++)
+        {
+            // cout<<matrix[r][c]<<" i "<<i<<endl;
+            ans.push_back(matrix[r][c]);
+            vv_bool[r][c] = true;
+            int cr = r + dic_r[det];
+            int cc = c + dic_c[det];
+            // cout<<"det "<<det<<" cr "<<cr<<" cc "<<cc<<endl;
+            // if (vv_bool[cr][cc])
+            // {
+            //     cout<<" true"<<endl;
+            // }
+            // else
+            // {
+            //     cout<<"false"<<endl;
+            // }
+            
+            
+            // 确保 matrix[r][c] 没有超出范围
+            if (0 <= cc && cc < C_size && 0 <= cr && cr < R_size  && !vv_bool[cr][cc])
             {
-                int tmp = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = tmp;
+                
+                // 还在范围内就继续直走
+                r = cr;
+                c = cc;
+                // cout<<" r " <<r<<" c "<<c<<endl;
+
+            }
+            else
+            {
+                // cout<<"转弯"<<endl;
+                // 不在范围内就转个弯
+                det = (det + 1) % 4;
+                // cout<<" else det "<<det<<endl;
+                r = r + dic_r[det];
+                c = c + dic_c[det];
+                // cout<<" r " <<r<<" c "<<c<<endl;
+
             }
             
-        }
-         for (int i = 0; i < matrix.size(); i++)
-        {
-            for (int j = 0; j <= size / 2; j++)
-            {
-                // if (size % 2 == 0 && size / 2 == j)
-                // {
-                //    break;
-                // }
-                
-                int tmp = matrix[i][j];
-                // matrix[j][i] = matrix[size - j][i];
-                // matrix[size - j][i] = tmp;
-                matrix[i][j] = matrix[i][size - j];
-                matrix[i][size - j] = tmp;
-            }
             
         }
         
+        return ans;
     }
 
 };
@@ -94,28 +120,28 @@ int main(int argc,char** argv){
     
     cout<<"31 "<<endl;
     vector<vector<int>> nums;
-    nums.resize(3);
-    
-    nums[0].push_back(1);
-    nums[0].push_back(2);
-    nums[0].push_back(3);
-    nums[1].push_back(4);
-    nums[1].push_back(5);
-    nums[1].push_back(6);
-    nums[2].push_back(7);
-    nums[2].push_back(8);
-    nums[2].push_back(9);
+    // nums.resize(3);
     
     // nums[0].push_back(1);
     // nums[0].push_back(2);
     // nums[0].push_back(3);
-    // nums[0].push_back(4);
+    // nums[1].push_back(4);
     // nums[1].push_back(5);
     // nums[1].push_back(6);
-    // nums[1].push_back(7);
-    // nums[1].push_back(8);
+    // nums[2].push_back(7);
+    // nums[2].push_back(8);
     // nums[2].push_back(9);
-    // nums[2].push_back(10);
+    
+    nums[0].push_back(1);
+    nums[0].push_back(2);
+    nums[0].push_back(3);
+    nums[0].push_back(4);
+    nums[0].push_back(5);
+    nums[0].push_back(6);
+    nums[0].push_back(7);
+    nums[0].push_back(8);
+    nums[0].push_back(9);
+    nums[0].push_back(10);
     // nums[2].push_back(11);
     // nums[2].push_back(12);
     // nums[3].push_back(13);
@@ -127,11 +153,12 @@ int main(int argc,char** argv){
 
     Solution s;
     // int size =nums.size();
-    for_each(nums.begin(),nums.end(),printVV);
+    // for_each(nums.begin(),nums.end(),printVV);
     // for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
     cout<<endl;
-    s.rotate(nums);    
-    for_each(nums.begin(),nums.end(),printVV);
-   
+    vector<int> vResult;
+    vResult =  s.spiralOrder(nums);    
+    for_each(vResult.begin(),vResult.end(),[](int ele){cout<<ele<<" ";});
+    cout<<endl;
     return 0;
 }
