@@ -6,17 +6,34 @@
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-         vector<int>  ans;
+           vector<int>  ans;
         if (matrix.empty())
         {
             return ans;
         }
+         if (matrix.size() == 1)
+         {
+             return matrix[0];
+             
+         }
          
         // vector<vector<int>> vv_bool;
         // 调试真的好难呀
         int R_size = matrix.size(), C_size = matrix[0].size();
         // cout<<R_size<<C_size<<endl;
-        bool vv_bool[R_size][C_size] ;
+        int vv_bool[R_size][C_size] = {0,0} ;
+        for (int i = 0; i < R_size; i++)
+        {
+           for (int j = 0; j < C_size; j++)
+           {
+            //   cout<<vv_bool[i][j]<<" ";
+            vv_bool[i][j] = 0;
+           }
+
+           
+        }
+       
+        
         int r = 0,c = 0;
         int dic_r[4] = {0,1,0,-1};
         int dic_c[4] = {1,0,-1,0};
@@ -26,24 +43,16 @@ public:
         {
             // cout<<matrix[r][c]<<" i "<<i<<endl;
             ans.push_back(matrix[r][c]);
-            vv_bool[r][c] = true;
+            vv_bool[r][c] = 1;
             int cr = r + dic_r[det];
             int cc = c + dic_c[det];
             // cout<<"det "<<det<<" cr "<<cr<<" cc "<<cc<<endl;
-            // if (vv_bool[cr][cc])
-            // {
-            //     cout<<" true"<<endl;
-            // }
-            // else
-            // {
-            //     cout<<"false"<<endl;
-            // }
             
             
             // 确保 matrix[r][c] 没有超出范围
-            if (0 <= cc && cc < C_size && 0 <= cr && cr < R_size  && !vv_bool[cr][cc])
+            if (0 <= cc && cc < C_size && 0 <= cr && cr < R_size  && vv_bool[cr][cc] == 0)
             {
-                
+            
                 // 还在范围内就继续直走
                 r = cr;
                 c = cc;
@@ -59,6 +68,7 @@ public:
                 r = r + dic_r[det];
                 c = c + dic_c[det];
                 // cout<<" r " <<r<<" c "<<c<<endl;
+                
 
             }
             
