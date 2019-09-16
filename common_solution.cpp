@@ -19,57 +19,55 @@ class  Solution
 public:
      Solution(/* args */ );
     ~ Solution();
-      int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-        int m = obstacleGrid.size();
-        int n = obstacleGrid[0].size();
-        // 试试排列组合 在c++里头怎么使用的
-        //   int ans = boost::math::factorial(flaot(m + n - 2)) / boost::math::factorial(float(m - 1)) / boost::math::factorial(float(n - 1 ));
-        // return ans;
-        // 也许是背包问题
-        // vector<vector<int>> obstacleGrid;
-        //  先计算从(0,0)出发 到达 (i,j)的最小路径
-        // 记录在数组里 遍历一遍就能把任意一个位置的路径找出来了.
-        // 到达第一横排(0,i)坐标的路径就只有一条,同理的还有第一竖排坐标(i,0).
-        // int obstacleGrid[m][n]={0};
-        if (obstacleGrid[0][0] == 1)
+  vector<int> plusOne(vector<int>& digits) {
+        bool plus = true;
+        int n = digits.size();
+        for (int i = n - 1; i >= 0; i--)
         {
-            return 0;
-        }
-        obstacleGrid[0][0] = 1;
-        
-        for (int i = 1; i < m; i++)
-        {
-            obstacleGrid[i][0] = (obstacleGrid[i][0]==0 && obstacleGrid[i -1][0] == 1)? 1:0;
-        }
-        for (int i = 1; i < n; i++)
-        {
-            obstacleGrid[0][i] = (obstacleGrid[0][i]==0 && obstacleGrid[0][i - 1] == 1)? 1:0;
-        }
-        // 到达任意一个坐标(i,j)的路径 计算方法为 
-        // 到达 (i- 1)(j)的路径数加上(i)(j-1)的路径路 
-        // 因为这两个点到目标位置的路径只有一条了
-        for (int i = 1; i < m; i++)
-        {
-            for (int j = 1; j < n; j++)
-            {
-                if (obstacleGrid[i][j] == 0)
-                {
-                  obstacleGrid[i][j] = obstacleGrid[i - 1][j] + obstacleGrid[i][j - 1];
-                }
-                else
-                {
-                    obstacleGrid[i][j] = 0;
-                }
-                
-                
-            }
+           if ((digits[i] + 1) / 10)
+           {
+               digits[i] = digits[i] + 1;
+               cout<<digits[i]<<endl;
+               if (digits[i] >= 10 )
+               {
+                  cout<<"sss"<<endl;
+                   digits[i] = 0;
+                   plus =true;
+               }
+               else
+               {
+                   return digits;
+               }
+               
+               
+           }
+           else
+           {
+               if (plus)
+               {
+                     digits[i] = digits[i] + 1;
+                     plus = false;
+               }
+               
             
+           }
+           
+           
+           
+           
         }
+        if (plus)
+           {
+            //    digits.insert(digits.begin(),1);
+            digits[0] = 1;
+            digits.push_back(0);
+            cout<<"end"<<digits[0]<<endl;
+           }
+        return digits;
         
-        return obstacleGrid[m - 1][n - 1];
 
+        
     }
-
 };
  Solution:: Solution(/* args */)
 {
@@ -107,18 +105,18 @@ void printString(string out){
 int main(int argc,char** argv){
     
     cout<<"62 "<<endl;
-    vector<vector<int>> nums;
-    nums.resize(3);
+    vector<int> nums;
+    // nums.resize(3);
     
-    nums[0].push_back(0);
-    nums[0].push_back(0);
-    nums[0].push_back(0);
-    nums[1].push_back(0);
-    nums[1].push_back(1);
-    nums[1].push_back(0);
-    nums[2].push_back(0);
-    nums[2].push_back(0);
-    nums[2].push_back(0);
+    // nums[0].push_back(1);
+    // nums[0].push_back(3);
+    // nums[0].push_back(1);
+    // nums[1].push_back(1);
+    // nums[1].push_back(5);
+    // nums[1].push_back(1);
+    // nums[2].push_back(4);
+    // nums[2].push_back(2);
+    // nums[2].push_back(1);
     // nums[3].push_back(15);
     // nums[3].push_back(18);
     
@@ -150,18 +148,18 @@ int main(int argc,char** argv){
     // nums.push_back(2);
     // nums.push_back(1);
     // nums.push_back(0);
-    // nums.push_back(4);
-    
+    nums.push_back(9);
+    nums.push_back(9);
     
     Solution s;
     // int size =nums.size();
-    int result;
-    result = s.uniquePathsWithObstacles(nums);
-    cout<< result;
+    vector<int> result;
+    result = s.plusOne(nums);
+    cout<< result[0]<<endl;
     
 
     // for_each(nums.begin(),nums.end(),printVV);
-    // for_each(nums.begin(),nums.begin() + size,[](int ele){cout<<ele<<" ";});
+    for_each(result.begin(),result.end() - 1,[](int ele){cout<<ele<<" ";});
     cout<<endl;
     // vector<vector<int>> vvResult ;
     // vector<int> vResult;
