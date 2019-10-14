@@ -19,53 +19,7 @@ class  Solution
 public:
      Solution(/* args */ );
     ~ Solution();
-  vector<int> plusOne(vector<int>& digits) {
-        bool plus = true;
-        int n = digits.size();
-        for (int i = n - 1; i >= 0; i--)
-        {
-           if ((digits[i] + 1) / 10)
-           {
-               digits[i] = digits[i] + 1;
-               cout<<digits[i]<<endl;
-               if (digits[i] >= 10 )
-               {
-                  cout<<"sss"<<endl;
-                   digits[i] = 0;
-                   plus =true;
-               }
-               else
-               {
-                   return digits;
-               }
-               
-               
-           }
-           else
-           {
-               if (plus)
-               {
-                     digits[i] = digits[i] + 1;
-                     plus = false;
-               }
-               
-            
-           }
-           
-           
-           
-           
-        }
-        if (plus)
-           {
-            //    digits.insert(digits.begin(),1);
-            digits[0] = 1;
-            digits.push_back(0);
-            cout<<"end"<<digits[0]<<endl;
-           }
-        return digits;
-        
-
+   void setZeroes(vector<vector<int>>& matrix) {
         
     }
 };
@@ -102,21 +56,44 @@ void printString(string out){
     cout<<out<<endl;
 
 }
+class a{
+  
+  public:
+    a(){
+
+    };
+   virtual ~a(){
+
+   };
+   void get_add_double(double*  dou_2){
+        dou_2 = &(this->dou_1);
+   }
+   void set(double val){
+       this->dou_1 = val;
+   }
+   void show_double(){
+       cout<<" show "<<dou_1<<endl;
+   }
+    private: 
+    
+    double dou_1;
+    int b;
+};
 int main(int argc,char** argv){
     
     cout<<"62 "<<endl;
-    vector<int> nums;
+    vector<vector<int>> nums;
     // nums.resize(3);
     
-    // nums[0].push_back(1);
-    // nums[0].push_back(3);
-    // nums[0].push_back(1);
-    // nums[1].push_back(1);
-    // nums[1].push_back(5);
-    // nums[1].push_back(1);
-    // nums[2].push_back(4);
-    // nums[2].push_back(2);
-    // nums[2].push_back(1);
+    nums[0].push_back(1);
+    nums[0].push_back(1);
+    nums[0].push_back(1);
+    nums[1].push_back(1);
+    nums[1].push_back(0);
+    nums[1].push_back(1);
+    nums[2].push_back(1);
+    nums[2].push_back(1);
+    nums[2].push_back(1);
     // nums[3].push_back(15);
     // nums[3].push_back(18);
     
@@ -148,25 +125,26 @@ int main(int argc,char** argv){
     // nums.push_back(2);
     // nums.push_back(1);
     // nums.push_back(0);
-    nums.push_back(9);
-    nums.push_back(9);
-    
-    Solution s;
-    // int size =nums.size();
-    vector<int> result;
-    result = s.plusOne(nums);
-    cout<< result[0]<<endl;
+    // nums.push_back(9);
+    // nums.push_back(9);
+  
+    // cout<<sizeof(a)<<endl;
+    // Solution s;
+    // // int size =nums.size();
+    // vector<int> result;
+    // result = s.plusOne(nums);
+    // cout<< result[0]<<endl;
     
 
-    // for_each(nums.begin(),nums.end(),printVV);
-    for_each(result.begin(),result.end() - 1,[](int ele){cout<<ele<<" ";});
-    cout<<endl;
-    // vector<vector<int>> vvResult ;
-    // vector<int> vResult;
-    // vResult =  s.spiralOrder(nums);
-    // vvResult = s.generateMatrix(4);
-    // for_each(vvResult.begin(),vvResult.end(),printVV);
-    // for_each(vResult.begin(),vResult.end(),[](int ele){cout<<ele<<" ";});
+    // // for_each(nums.begin(),nums.end(),printVV);
+    // for_each(result.begin(),result.end() - 1,[](int ele){cout<<ele<<" ";});
+    // cout<<endl;
+    // // vector<vector<int>> vvResult ;
+    // // vector<int> vResult;
+    // // vResult =  s.spiralOrder(nums);
+    // // vvResult = s.generateMatrix(4);
+    // // for_each(vvResult.begin(),vvResult.end(),printVV);
+    // // for_each(vResult.begin(),vResult.end(),[](int ele){cout<<ele<<" ";});
   
     return 0;
 }
