@@ -49,6 +49,9 @@ public:
          
         
     }
+     ListNode* reverseKGroup(ListNode* head, int k) {
+        
+    }
     // 36 有效的数独 判断数独是否有效
     bool judgeRow(vector<vector<char>>& board,int row,int cel,char value){
         for (size_t i = 0; i < 9 ; i++)
