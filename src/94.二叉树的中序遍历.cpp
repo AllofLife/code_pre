@@ -45,18 +45,16 @@ public:
         }
         vector<int> result;
         stack<TreeNode*> sta;
-        sta.push(root);
+    
         TreeNode* cur  = root;
-        while (cur != nullptr && sta.size() != 0 )
+        while (cur != nullptr || !sta.empty()  )
         {
             // 找到当前子树的最左边叶节点的左节点
             while (cur != nullptr)
             {
-               cur = cur->left;
                sta.push(cur);
+               cur = cur->left;
             }
-            // 当前子树的最左边的叶子节点 的左节点为空
-            sta.pop();
             // 取出当前子树的最左边的叶子节点
             cur = sta.top();
             // 中序访问
@@ -65,10 +63,9 @@ public:
             sta.pop();
             // 叶子节点的右子树
             cur = cur->right;
-            // 换了一棵树 切换到了叶子节点的右子树
-            sta.push(cur);
             
         }
+        return result;
     }
 };
 // @lc code=end

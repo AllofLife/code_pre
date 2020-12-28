@@ -17,6 +17,7 @@
         "utility": "cpp",
         "algorithm": "cpp",
         "mutex": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "xlocale": "cpp"
     }
 }
